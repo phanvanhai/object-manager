@@ -1,0 +1,60 @@
+name: "ManagerProfile"
+manufacturer: "HUST-3I"
+model: "SP-01"
+labels:
+  - "test manager"
+description: "Example of Master Profile"
+
+deviceResources:
+  -
+    name: "ManagerObjectName"    
+    properties:
+      value:
+        { type: "String", readWrite: "W", defaultValue: "" }
+      units:
+        { type: "String", readWrite: "R", defaultValue: "" }   
+  -
+    name: "ManagerCommandName"    
+    properties:
+      value:
+        { type: "String", readWrite: "W", defaultValue: "" }
+      units:
+        { type: "String", readWrite: "R", defaultValue: "" }        
+  -
+    name: "ManagerMethod"    
+    properties:
+      value:
+        { type: "String", readWrite: "W", defaultValue: "" }
+      units:
+        { type: "String", readWrite: "R", defaultValue: "" }  
+  -
+    name: "ManagerBody"    
+    properties:
+      value:
+        { type: "String", readWrite: "W", defaultValue: "" }
+      units:
+        { type: "String", readWrite: "R", defaultValue: "" }    
+              
+deviceCommands:
+  -
+    name: "Manager"    
+    set:
+      - { operation: "set", deviceResource: "ManagerObjectName", parameter: "" }
+      - { operation: "set", deviceResource: "ManagerCommandName", parameter: "" }
+      - { operation: "set", deviceResource: "ManagerMethod", parameter: "" }
+      - { operation: "set", deviceResource: "ManagerBody", parameter: "" }
+
+coreCommands:
+  -
+    name: "Manager"
+    put:
+      path: "/api/v1/device/{deviceId}/Manager"
+      parameterNames: ["ManagerObjectName","ManagerCommandName","ManagerMethod","ManagerBody"]
+      responses:
+        -
+          code: "200"
+          description: "Successfully write the configuration"
+        -
+          code: "500"
+          description: "Internal Server Error"
+          expectedValues: []

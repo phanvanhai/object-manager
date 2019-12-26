@@ -1,0 +1,51 @@
+name: "ScenarioProfile"
+manufacturer: "HUST-3I"
+model: "SP-01"
+labels:
+  - "Scenarion"
+description: "Example of Scenarion Profile"
+
+deviceResources:
+  -
+    name: "Trigger"
+    description: "On/Off"
+    attributes:
+      { profileID: "260", clusterID: "64528", attributeID: "16", valueType: "1" }
+    properties:
+      value:
+        { type: "Int16", readWrite: "RW", defaultValue: "0" }
+      units:
+        { type: "String", readWrite: "R", defaultValue: "On/Off" }            
+deviceCommands:
+  -
+    name: "Trigger"
+    get:
+      - { operation: "get", deviceResource: "Trigger" }
+    set:
+      - { operation: "set", deviceResource: "Trigger", parameter: "0" }
+
+coreCommands:
+  -
+    name: "Trigger"
+    get:
+      path: "/api/v1/device/{deviceId}/Trigger"
+      responses:
+        -
+          code: "200"
+          description: ""
+          expectedValues: ["Trigger"]
+        -
+          code: "503"
+          description: "service unavailable"
+          expectedValues: []
+    put:
+      path: "/api/v1/device/{deviceId}/Trigger"
+      parameterNames: ["Trigger"]
+      responses:
+        -
+          code: "200"
+          description: ""
+        -
+          code: "503"
+          description: "service unavailable"
+          expectedValues: []
